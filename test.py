@@ -16,15 +16,6 @@ import struct
 from struct import unpack
 from urllib.request import urlopen 
 from pathlib import Path
-from PIL import Image
-import numpy as np
-
-w, h = 512, 512
-data = np.zeros((h, w, 3), dtype=np.uint8)
-data[256, 256] = [255, 0, 0]
-img = Image.fromarray(data, 'RGB')
-img.show()
-
 
 def unpack_drawing(file_handle):
     key_id, = unpack('Q', file_handle.read(8))
@@ -70,6 +61,6 @@ def unpack_drawings(filename):
                 break
 
 
-#for drawing in unpack_drawings('nose.bin'):
+for drawing in unpack_drawings('nose.bin'):
     # do something with the drawing
-#    print(drawing['countrycode'])
+    print(drawing['countrycode'])
