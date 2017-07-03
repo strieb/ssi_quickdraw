@@ -1,0 +1,6 @@
+circle
+square
+triangle
+jail
+smiley face
+line

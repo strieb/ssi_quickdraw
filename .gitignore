@@ -1,1 +1,5 @@
 *.bin
+*.stream
+*.stream~
+*.samples
+*.samples~
