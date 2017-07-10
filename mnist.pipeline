@@ -8,7 +8,7 @@
 		<load name="graphic" />	
 	</register>	
 		
-	<sensor create="FileReader" path="../ssi_quickdraw/test">
+	<sensor create="FileReader" path="../ssi_quickdraw/test.samples.#0">
 		<output channel="file" pin="mnist"/>
 	</sensor>
 	

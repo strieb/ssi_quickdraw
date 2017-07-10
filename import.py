@@ -10,9 +10,6 @@ import math
 
 np.set_printoptions(threshold=np.nan)
 
-SKIP = 0
-N = 1000
-
 def read_categories():
     with open('categories.txt', 'r') as f:
         categories = f.readlines()
@@ -38,7 +35,7 @@ def read_and_write(samples_info,samples_data,stream_info,stream_data):
 """)
     stream_info.write("""<?xml version="1.0" ?>
 <stream ssi-v="2">
-    <info ftype="BINARY" sr="50.000000" dim="1024" byte="4" type="FLOAT" delim=" " />
+    <info ftype="BINARY" sr="1.000000" dim="1024" byte="4" type="FLOAT" delim=" " />
     <meta />
 """)
     b = 0
@@ -57,6 +54,7 @@ def read_and_write(samples_info,samples_data,stream_info,stream_data):
         drawing = next(drawings[c])
         
     for n in range(N):
+        print(str(n))
         for c in range(len(categories)):
             drawing = next(drawings[c])
             category = categories[c]
@@ -64,7 +62,6 @@ def read_and_write(samples_info,samples_data,stream_info,stream_data):
             samples_data.write('0 '+str(c)+ ' 0 0\n')
             stream_info.write('    <chunk from="0" to="1" byte="'+str(b)+'" num="1"/>\n')
             b += 4096
-
             img_arr =  np.array(drawing['image'])
             for i in range(len(img_arr)):
                 for j in range(len(img_arr[i][0]) - 1):
@@ -73,8 +70,6 @@ def read_and_write(samples_info,samples_data,stream_info,stream_data):
                     x2 = int( img_arr[i][0][j + 1] / 8)
                     y2 = int( img_arr[i][1][j + 1] / 8)
                     line(img,x1,y1,x2,y2)
-            if(n == 1):
-                print(img)
             for x in range(0,32):
                 for y in range(0,32):
                     stream_data.write(struct.pack('f',img[x,y]))
@@ -136,7 +131,8 @@ def unpack_drawings(filename):
                 break
 
         
-
-write_samples("train")
+SKIP = 200
+N = 20
+write_samples("test")
 
 
