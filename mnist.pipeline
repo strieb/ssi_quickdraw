@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<pipeline>
+
+	<register>
+		<load name="python" />		
+		<load name="ioput" />		
+		<load name="model" />	
+		<load name="graphic" />	
+	</register>	
+		
+	<sensor create="FileReader" path="../ssi_quickdraw/test">
+		<output channel="file" pin="mnist"/>
+	</sensor>
+	
+	<consumer create="Classifier" trainer="../ssi_quickdraw/mnist" address="digit@mnist" winner="true">
+		<input pin="mnist" frame="1"/>
+	</consumer>
+	
+	<consumer create="SignalPainter:plot" title="MNIST" type="1" staticImage="true" indx="32" indy="32" colormap="3">
+		<input pin="mnist" frame="1"/>
+	</consumer>
+	
+	<object create="EventMonitor:monitor" all="false">
+		<listen address="digit@mnist"/>
+	</object>
+	
+	<!-- decoration -->
+	<object create="Decorator" icon="true" title="Pipeline">
+		<area pos="0,0,400,400">console</area>
+		<area pos="400,0,400,400">plot*</area>		
+		<area pos="800,0,400,400">monitor*</area>	
+	</object>
+		
+</pipeline>

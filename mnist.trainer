@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<trainer ssi-v="5">
+    <info trained="true" />
+    <streams>
+        <item byte="4" dim="1024" sr="50.000000" type="FLOAT" />
+    </streams>
+    <classes>
+        <item name="circle" />
+        <item name="square" />
+        <item name="triangle" />
+        <item name="jail" />
+        <item name="smiley face" />
+        <item name="line" />
+    </classes>
+    <users>
+        <item name="user" />
+    </users>
+    <model create="PythonModel" stream="0" path="mnist.trainer.PythonModel" option="mnist.trainer.PythonModel" />
+</trainer>

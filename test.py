@@ -63,4 +63,5 @@ def unpack_drawings(filename):
 
 for drawing in unpack_drawings('nose.bin'):
     # do something with the drawing
-    print(drawing['countrycode'])
+    print(drawing['image'])
+    break
