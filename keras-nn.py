@@ -16,7 +16,7 @@ def getOptions(opts, vars):
     opts['model_path'] = ''
     opts['batch_size'] = 128
     opts['n_epoch'] = 10
-    opts['validation_split'] = 0.8
+    opts['validation_split'] = 0.1
     opts['verbose'] = 1
     opts['class_weight'] = ''
 

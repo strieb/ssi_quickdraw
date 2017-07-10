@@ -51,7 +51,9 @@ def read_and_write(samples_info,samples_data,stream_info,stream_data):
 </samples>""")
     
     for n in range(SKIP):
-        drawing = next(drawings[c])
+        for c in range(len(categories)):
+            drawing = next(drawings[c])
+        
         
     for n in range(N):
         print(str(n))
@@ -131,6 +133,10 @@ def unpack_drawings(filename):
                 break
 
         
+SKIP = 0
+N = 200
+write_samples("train")
+
 SKIP = 200
 N = 20
 write_samples("test")

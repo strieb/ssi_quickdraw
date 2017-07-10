@@ -10,7 +10,7 @@ def getModel (n_input, n_output):
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
     model.add(Flatten())
-    model.add(Dense(128, activation='relu'))
+    model.add(Dense(256, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(n_output, activation='softmax'))
 
