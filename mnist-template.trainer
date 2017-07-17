@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-<trainer ssi-v="5">
-    <info trained="false"/>
-    <samples n_streams="1">
-		<item path="train"/>
-    </samples>    
-    <model create="PythonModel" stream="0" option="mnist"/>
-</trainer>

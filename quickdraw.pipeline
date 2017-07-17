@@ -9,25 +9,25 @@
 		<load name="signal" />	
 	</register>	
 		
-	<sensor create="FileReader" path="../ssi_quickdraw/test.samples.#0">
-		<output channel="file" pin="mnist"/>
+	<sensor create="FileReader" path="../ssi_quickdraw2/test.samples.#0">
+		<output channel="file" pin="quickdraw"/>
 	</sensor>
 	
-	<consumer create="Classifier" trainer="../ssi_quickdraw/mnist" address="digit@mnist" winner="true">
-		<input pin="mnist" frame="1"/>
+	<consumer create="Classifier" trainer="../ssi_quickdraw2/quickdraw" address="digit@quickdraw" winner="true">
+		<input pin="quickdraw" frame="1"/>
 	</consumer>
 	
 <transformer create="Expression" single="false" expression="-d">
-    <input pin="mnist" frame="1"/>
-    <output pin="mnist-inv"/>
+    <input pin="quickdraw" frame="1"/>
+    <output pin="quickdraw-inv"/>
 </transformer>
 	
-	<consumer create="SignalPainter:plot" title="MNIST" type="1" staticImage="true" indx="32" indy="32" colormap="3">
-		<input pin="mnist-inv" frame="1"/>
+	<consumer create="SignalPainter:plot" title="QUICKDRAW" type="1" staticImage="true" indx="32" indy="32" colormap="3">
+		<input pin="quickdraw-inv" frame="1"/>
 	</consumer>
 	
 	<object create="EventMonitor:monitor" all="false">
-		<listen address="digit@mnist"/>
+		<listen address="digit@quickdraw"/>
 	</object>
 	
 	<!-- decoration -->

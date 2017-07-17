@@ -12,7 +12,7 @@ import cv2
 np.set_printoptions(threshold=np.nan)
 
 def read_categories():
-    with open('categories.txt', 'r') as f:
+    with open('categories_10.txt', 'r') as f:
         categories = f.readlines()
     categories = [x.strip() for x in categories]
     return categories
