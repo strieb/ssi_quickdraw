@@ -7,6 +7,7 @@ import urllib.parse
 from pathlib import Path
 import numpy as np
 import math
+import cv2
 
 np.set_printoptions(threshold=np.nan)
 
@@ -52,15 +53,21 @@ def read_and_write(samples_info,samples_data,stream_info,stream_data):
     
     for n in range(SKIP):
         for c in range(len(categories)):
-            drawing = next(drawings[c])
+            while True:
+                drawing = next(drawings[c])
+                if drawing['recognized']:
+                    break
         
         
     for n in range(N):
         print(str(n))
         for c in range(len(categories)):
-            drawing = next(drawings[c])
+            while True:
+                drawing = next(drawings[c])
+                if drawing['recognized']:
+                    break
             category = categories[c]
-            img = np.zeros((32, 32), dtype=np.uint8)
+            img = np.zeros((32, 32), dtype=np.float32)
             samples_data.write('0 '+str(c)+ ' 0 0\n')
             stream_info.write('    <chunk from="0" to="1" byte="'+str(b)+'" num="1"/>\n')
             b += 4096
@@ -71,10 +78,8 @@ def read_and_write(samples_info,samples_data,stream_info,stream_data):
                     y1 = int( img_arr[i][1][j] / 8)
                     x2 = int( img_arr[i][0][j + 1] / 8)
                     y2 = int( img_arr[i][1][j + 1] / 8)
-                    line(img,x1,y1,x2,y2)
-            for x in range(0,32):
-                for y in range(0,32):
-                    stream_data.write(struct.pack('f',img[x,y]))
+                    line(img, x1,y1, x2, y2,1)
+            stream_data.write(struct.pack('f'*1024,*img.flat))
     stream_info.write("</stream>")
 			
 
@@ -103,14 +108,14 @@ def unpack_drawing(file_handle):
     }
 
 
-def line(img, x1,y1,x2,y2):
+def line(img, x1,y1,x2,y2,col):
 	l = math.hypot(x1-x2 , y1-y2)
 	if l == 0:
-            return
+	    return
 	samples = (int) (l * 5)
 	for i in range(0, samples + 1):
-		img[int((x2-x1)*(i/samples)+x1),int((y2-y1)*(i/samples)+y1)] += 1
-
+            img[int((x2-x1)*(i/samples)+x1),int((y2-y1)*(i/samples)+y1)] += col / 5
+	    
 def unpack_drawings(filename):
     path = "binaries/"+filename+".bin";
     my_file = Path(path)
@@ -133,12 +138,12 @@ def unpack_drawings(filename):
                 break
 
         
-SKIP = 0
-N = 200
+SKIP = 10
+N = 500
 write_samples("train")
 
-SKIP = 200
-N = 20
+SKIP = 0
+N = 10
 write_samples("test")
 
 

@@ -1,6 +1,7 @@
 
 import numpy as np
 import math
+import cv2
 
 def line(img, x1,y1,x2,y2):
 	len = math.hypot(x1-x2 , y1-y2)
@@ -10,7 +11,6 @@ def line(img, x1,y1,x2,y2):
 	print(len)
 	
 
-img = np.zeros((10, 10), dtype=np.uint8)
-line(img, 3, 8, 5, 5)
-line(img, 5, 5, 9, 9)
+img = np.zeros((10, 10), dtype=cv2.CV_8UC1)
+img = cv2.line(img, (3, 5), (9, 9),(1,0,0),1,lineType  = cv2.LINE_AA)
 print(img)

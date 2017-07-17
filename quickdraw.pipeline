@@ -6,6 +6,7 @@
 		<load name="ioput" />		
 		<load name="model" />	
 		<load name="graphic" />	
+		<load name="signal" />	
 	</register>	
 		
 	<sensor create="FileReader" path="../ssi_quickdraw/test.samples.#0">
@@ -16,8 +17,13 @@
 		<input pin="mnist" frame="1"/>
 	</consumer>
 	
+<transformer create="Expression" single="false" expression="-d">
+    <input pin="mnist" frame="1"/>
+    <output pin="mnist-inv"/>
+</transformer>
+	
 	<consumer create="SignalPainter:plot" title="MNIST" type="1" staticImage="true" indx="32" indy="32" colormap="3">
-		<input pin="mnist" frame="1"/>
+		<input pin="mnist-inv" frame="1"/>
 	</consumer>
 	
 	<object create="EventMonitor:monitor" all="false">
