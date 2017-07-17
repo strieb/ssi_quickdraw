@@ -12,7 +12,7 @@ import cv2
 np.set_printoptions(threshold=np.nan)
 
 def read_categories():
-    with open('categories_10.txt', 'r') as f:
+    with open('categories.txt', 'r') as f:
         categories = f.readlines()
     categories = [x.strip() for x in categories]
     return categories
@@ -53,6 +53,7 @@ def read_and_write(samples_info,samples_data,stream_info,stream_data):
     
     for n in range(SKIP):
         for c in range(len(categories)):
+            
             while True:
                 drawing = next(drawings[c])
                 if drawing['recognized']:
@@ -138,12 +139,12 @@ def unpack_drawings(filename):
                 break
 
         
-SKIP = 10
+SKIP = 50
 N = 500
 write_samples("train")
 
 SKIP = 0
-N = 10
+N = 50
 write_samples("test")
 
 

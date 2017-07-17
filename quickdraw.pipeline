@@ -9,11 +9,11 @@
 		<load name="signal" />	
 	</register>	
 		
-	<sensor create="FileReader" path="../ssi_quickdraw2/test.samples.#0">
-		<output channel="file" pin="quickdraw"/>
+	<sensor create="FileReader" path="../ssi_quickdraw/test.samples.#0" >
+		<output channel="file" pin="quickdraw" />
 	</sensor>
 	
-	<consumer create="Classifier" trainer="../ssi_quickdraw2/quickdraw" address="digit@quickdraw" winner="true">
+	<consumer create="Classifier" trainer="../ssi_quickdraw/quickdraw" address="digit@quickdraw" winner="true">
 		<input pin="quickdraw" frame="1"/>
 	</consumer>
 	

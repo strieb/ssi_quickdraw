@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<trainer ssi-v="5">
+    <info trained="true" />
+    <streams>
+        <item byte="4" dim="1024" sr="1.000000" type="FLOAT" />
+    </streams>
+    <classes>
+        <item name="candle" />
+        <item name="circle" />
+        <item name="envelope" />
+        <item name="fish" />
+        <item name="flower" />
+        <item name="house" />
+        <item name="jail" />
+        <item name="rainbow" />
+        <item name="snowman" />
+        <item name="triangle" />
+    </classes>
+    <users>
+        <item name="user" />
+    </users>
+    <model create="PythonModel" stream="0" path="quickdraw.trainer.PythonModel" option="quickdraw.trainer.PythonModel" />
+</trainer>

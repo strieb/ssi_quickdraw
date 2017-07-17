@@ -1,0 +1,10 @@
+candle
+circle
+envelope
+fish
+flower
+house
+jail
+rainbow
+snowman
+triangle
